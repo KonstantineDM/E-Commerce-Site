@@ -38,8 +38,8 @@
 <div class="container">
     <div class="starter-template">
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/mobiles">
-                <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/mobile.jpg">
+            <a href="/mobiles">
+                <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2022/03/Samsung-Galaxy-S22-Plus-home-screen-4-scaled.jpg" width="150">
                 <h2>Мобильные телефоны</h2>
             </a>
             <p>
@@ -47,8 +47,8 @@
             </p>
         </div>
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/portable">
-                <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/portable.jpg">
+            <a href="/portable">
+                <img src="https://static.nix.ru/images/SmartBuy-SBS-5040-5173012246.jpg?good_id=517301&width=500&height=500&view_id=2246" width="150">
                 <h2>Портативная техника</h2>
             </a>
             <p>
@@ -56,8 +56,8 @@
             </p>
         </div>
         <div class="panel">
-            <a href="http://laravel-diplom-1.rdavydov.ru/appliances">
-                <img src="http://laravel-diplom-1.rdavydov.ru/storage/categories/appliance.jpg">
+            <a href="/appliances">
+                <img src="https://avatars.mds.yandex.net/get-altay/4804646/2a0000017ae219deac0f17ac841becca5fd2/XXL" width="150">
                 <h2>Бытовая техника</h2>
             </a>
             <p>
