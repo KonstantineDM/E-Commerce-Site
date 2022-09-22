@@ -14,5 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+Route::get('/categories', function () {
+    return view('categories');
+});
+
+Route::get('/product/iphone-x64', function () {
+    return view('product');
 });

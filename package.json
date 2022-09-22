@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "start": "php -S localhost:8000 -t ./public",
         "dev": "vite",
         "build": "vite build"
     },
