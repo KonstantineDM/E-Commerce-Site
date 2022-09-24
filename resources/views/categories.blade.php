@@ -37,33 +37,17 @@
 
 <div class="container">
     <div class="starter-template">
-        <div class="panel">
-            <a href="/mobiles">
-                <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2022/03/Samsung-Galaxy-S22-Plus-home-screen-4-scaled.jpg" width="150">
-                <h2>Мобильные телефоны</h2>
-            </a>
-            <p>
-                В этом разделе вы найдёте самые популярные мобильные телефонамы по отличным ценам!
-            </p>
-        </div>
-        <div class="panel">
-            <a href="/portable">
-                <img src="https://static.nix.ru/images/SmartBuy-SBS-5040-5173012246.jpg?good_id=517301&width=500&height=500&view_id=2246" width="150">
-                <h2>Портативная техника</h2>
-            </a>
-            <p>
-                Раздел с портативной техникой.
-            </p>
-        </div>
-        <div class="panel">
-            <a href="/appliances">
-                <img src="https://avatars.mds.yandex.net/get-altay/4804646/2a0000017ae219deac0f17ac841becca5fd2/XXL" width="150">
-                <h2>Бытовая техника</h2>
-            </a>
-            <p>
-                Раздел с бытовой техникой
-            </p>
-        </div>
+        @foreach($categories as $category)
+            <div class="panel">
+                <a href="/{{ $category->code }}">
+                    <img src="https://www.trustedreviews.com/wp-content/uploads/sites/54/2022/03/Samsung-Galaxy-S22-Plus-home-screen-4-scaled.jpg" width="150">
+                    <h2>{{ $category->name }}</h2>
+                </a>
+                <p>
+                    {{ $category->description }}
+                </p>
+            </div>
+        @endforeach
     </div>
 </div>
 </body>
