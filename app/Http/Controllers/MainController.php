@@ -22,7 +22,15 @@ class MainController extends Controller
         return view('category', compact('category'));
     }
 
-    public function product(string $product = 'Generic Phone') {
+    public function product($category, $product = null) {
         return view('product', ['product' => $product]);
+    }
+
+    public function basket() {
+        return view('basket', compact('basket'));
+    }
+
+    public function basketOrder() {
+        return view('order', compact('order'));
     }
 }
