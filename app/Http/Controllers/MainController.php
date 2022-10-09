@@ -24,15 +24,10 @@ class MainController extends Controller
         return view('category', compact('category'));
     }
 
+    /**
+     * Show product's card
+     */
     public function product($category, $product = null) {
         return view('product', ['product' => $product]);
-    }
-
-    public function basket() {
-        return view('basket', compact('basket'));
-    }
-
-    public function basketOrder() {
-        return view('order', compact('order'));
     }
 }
