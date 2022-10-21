@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\Request;
 
 class BasketController extends Controller
 {
@@ -22,6 +24,14 @@ class BasketController extends Controller
 
     public function basketPlace()
     {
+        $orderId = session('orderId');
+
+        if (is_null($orderId)) {
+            return redirect()->route('index');
+        }
+
+        $order = Order::find($orderId);
+
         return view('order', compact('order'));
     }
 
@@ -33,7 +43,7 @@ class BasketController extends Controller
         $orderId = session('orderId');
 
         if (is_null($orderId)) {
-            $order = Order::create()->id;
+            $order = Order::create();
             session(['orderId' => $order->id]);
         } else {
             $order = Order::find($orderId);
@@ -46,6 +56,9 @@ class BasketController extends Controller
         } else {
             $order->products()->attach($productId);
         }
+
+        $product = Product::find($productId);
+        session()->flash('success', 'Товар добавлен в корзину: ' . $product->name);
 
         return redirect()->route('basket');
     }
@@ -73,6 +86,33 @@ class BasketController extends Controller
                 $pivotRow->update();
             }
         }
+
+        $product = Product::find($productId);
+        session()->flash('warning', 'Товар удален из корзины: ' . $product->name);
+
         return redirect()->route('basket');
+    }
+
+    /**
+     * Place order with basket products
+     */
+    public function basketConfirm(Request $request)
+    {
+        $orderId = session('orderId');
+
+        if (is_null($orderId)) {
+            return redirect()->route('index');
+        }
+
+        $order = Order::find($orderId);
+        $success = $order->saveOrder($request->name, $request->phone);
+
+        if ($success) {
+            session()->flash('success', 'Заказ принят в работу');
+        } else {
+            session()->flash('warning', 'Ошибка при формировании заказа');
+        }
+
+        return redirect()->route('index');
     }
 }
