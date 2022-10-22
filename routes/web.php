@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\MainController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +26,12 @@ Auth::routes([
 
 Route::get('/logout', [LoginController::class, 'logout'])->name('log-out');
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::group([
+    'middleware' => 'auth',
+    'namespace' => 'Admin',
+], function() {
+    Route::get('/orders', [OrderController::class, 'index'])->name('home');
+});
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');

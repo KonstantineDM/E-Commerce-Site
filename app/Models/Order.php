@@ -14,6 +14,14 @@ class Order extends Model
         return $this->belongsToMany(Product::class)->withPivot('count')->withTimestamps();
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Returns the summarised price of all products in order
+     */
     public function getFullPrice()
     {
         $sum = 0;
