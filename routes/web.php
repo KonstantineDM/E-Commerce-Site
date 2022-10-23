@@ -30,17 +30,28 @@ Route::group([
     'middleware' => 'auth',
     'namespace' => 'Admin',
 ], function() {
-    Route::get('/orders', [OrderController::class, 'index'])->name('home');
+    Route::group(['middleware' => 'is_admin'], function() {
+        Route::get('/orders', [OrderController::class, 'index'])->name('home');
+    });
 });
+
+Route::group(['prefix' => 'basket'], function() {
+    Route::post('/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basket-add');
+    
+    Route::group([
+        'middleware' => 'basket_not_empty',
+    ], function() {
+        Route::get('/', [BasketController::class, 'basket'])->name('basket');
+        Route::get('/place', [BasketController::class, 'basketPlace'])->name('basket-place');
+        Route::post('/remove/{product_id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
+        Route::post('/confirm', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
+    });
+});
+
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 Route::get('/categories', [MainController::class, 'categories'])->name('categories');
 
-Route::get('/basket', [BasketController::class, 'basket'])->name('basket');
-Route::get('/basket/place', [BasketController::class, 'basketPlace'])->name('basket-place');
-Route::post('/basket/add/{product_id}', [BasketController::class, 'basketAdd'])->name('basket-add');
-Route::post('/basket/remove/{product_id}', [BasketController::class, 'basketRemove'])->name('basket-remove');
-Route::post('/basket/confirm', [BasketController::class, 'basketConfirm'])->name('basket-confirm');
 
 Route::get('/{category}', [MainController::class, 'category'])->name('category');
 Route::get('/{category}/{product?}', [MainController::class, 'product'])->name('product');
