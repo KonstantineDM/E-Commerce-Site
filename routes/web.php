@@ -6,6 +6,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,13 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('log-out');
 Route::group([
     'middleware' => 'auth',
     'namespace' => 'Admin',
+    'prefix' => 'admin'
 ], function() {
     Route::group(['middleware' => 'is_admin'], function() {
         Route::get('/orders', [OrderController::class, 'index'])->name('home');
     });
+
+    Route::resource('categories', 'CategoryController');
 });
 
 Route::group(['prefix' => 'basket'], function() {
